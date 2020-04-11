@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EMS.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,16 @@ namespace EMS.SqlRepository.DbRepository
 {
     public class EmsRepository<T> : IEmsRepository<T> where T : class
     {
-        protected DbContext _dbContext;
-        public EmsRepository(DbContext dbContext)
+        protected readonly EmsContext _dbContext;
+        public EmsRepository(EmsContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task Add(T entity)
+        public async Task<bool> Add(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
+            return true;
         }
 
         public async Task<int> CountAll()

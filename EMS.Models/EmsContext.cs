@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EMS.ModelsRepository.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace EMS.Models
@@ -10,5 +11,10 @@ namespace EMS.Models
         {
 
         }
+        private DbSet<Block> Block { get; set; }
+
+        private DbSet<PM520L> PM520L { get; set; }
+
+        private DbSet<EmsMaster> emsMaster { get; set; }
     }
 }
