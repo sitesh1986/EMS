@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EMS.GraphApiRepository;
+using EMS.AzureGraphRepository;
 using EMS.ManagerRepository.FactoryRepository;
 using EMS.ManagerRepository.Manager;
 using EMS.Models;
@@ -17,7 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.OpenApi.Models;
 namespace EMS
 {
     public class Startup
@@ -37,19 +37,25 @@ namespace EMS
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DataConnection"));
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "EMS", Version = "v1" });
+            });
             services.AddScoped<EmsDataCalculateManager>();
             services.AddScoped<EmsBlockManager>();
             services.AddScoped<EmsDataCalculateManager>();
             services.AddScoped<EmsBlockManager>();
             services.AddScoped<Factory>();
             services.AddScoped<EmsPM520LManager>();
+            services.AddScoped<CustomerManager>();
             services.AddTransient(typeof(IEmsRepository<EmsMaster>), typeof(EmsRepository<EmsMaster>));
             services.AddTransient(typeof(IEmsRepository<Block>), typeof(EmsRepository<Block>));
             services.AddTransient(typeof(IEmsRepository<PM520L>), typeof(EmsRepository<PM520L>));
+            services.AddTransient(typeof(IEmsRepository<Customer>), typeof(EmsRepository<Customer>));
             services.AddSingleton<B2CGraphClient>(new B2CGraphClient
-               (Configuration["B2C:ClientId"],
-                Configuration["B2C:ClientSecret"],
-               Configuration["B2c:Tenant"]));
+               (Configuration["ClientId"],
+               Configuration["ClientSecret"],
+               Configuration["Tenant"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,7 +65,11 @@ namespace EMS
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "EMS - EMS Management Integration API v1.0");
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();

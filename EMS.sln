@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EMS.Common", "EMS.Common\EM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ems.ChangeFeedFunction", "Ems.ChangeFeedFunction\Ems.ChangeFeedFunction.csproj", "{5278E6D6-8D78-4F59-9545-BA9944E37054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.GraphApiRepository", "EMS.GraphApi.Repository\EMS.GraphApiRepository.csproj", "{DE5E73C4-961A-466D-A394-B17A420FB300}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.AzureGraphRepository", "EMS.AzureGraphRepository\EMS.AzureGraphRepository.csproj", "{30451583-C5F5-4741-8ABE-0F3285B66172}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{5278E6D6-8D78-4F59-9545-BA9944E37054}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5278E6D6-8D78-4F59-9545-BA9944E37054}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5278E6D6-8D78-4F59-9545-BA9944E37054}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE5E73C4-961A-466D-A394-B17A420FB300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE5E73C4-961A-466D-A394-B17A420FB300}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE5E73C4-961A-466D-A394-B17A420FB300}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE5E73C4-961A-466D-A394-B17A420FB300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30451583-C5F5-4741-8ABE-0F3285B66172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30451583-C5F5-4741-8ABE-0F3285B66172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30451583-C5F5-4741-8ABE-0F3285B66172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30451583-C5F5-4741-8ABE-0F3285B66172}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

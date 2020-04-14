@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EMS.GraphApiRepository
+namespace EMS.AzureGraphRepository
 {
     public class B2CGraphClient
     {

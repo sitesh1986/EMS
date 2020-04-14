@@ -10,6 +10,7 @@ using EMS.SqlRepository.DbRepository;
 using EMS.ModelsRepository.Models;
 using EMS.ManagerRepository.Manager;
 using EMS.ManagerRepository.FactoryRepository;
+using EMS.AzureGraphRepository;
 
 [assembly: FunctionsStartup(typeof(Ems.ChangeFeedFunction.EmsDependencyInjection.Startup))]
 namespace Ems.ChangeFeedFunction.EmsDependencyInjection

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EMS.GraphApiRepository
+namespace EMS.AzureGraphRepository
 {
     public class Globals
     {
