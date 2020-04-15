@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using EMS.Common.ViewModels;
 using EMS.ManagerRepository.Manager;
-using EMS.ModelsRepository.Models;
+using EMS.ModelBuilderRepository.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,16 +16,19 @@ namespace EMS.Controllers
     public class EMSCustomerController : ControllerBase
     {
         private CustomerManager _customerManager { get; set; }
-        public EMSCustomerController(CustomerManager customerManager)
+        private readonly IMapper _mapper;
+        public EMSCustomerController(CustomerManager customerManager,IMapper mapper)
         {
             _customerManager = customerManager;
+            _mapper = mapper;
         }
         [HttpPost]
-        public async Task<IActionResult> Post(Customer customer)
+        public async Task<IActionResult> Post(EMSCustomerViewModel customerViewModel)
         {
             try
             {
-              bool result= await _customerManager.CreateCustomer(customer);
+                var proCustomer = _mapper.Map<Customer>(customerViewModel);
+                bool result= await _customerManager.CreateCustomer(proCustomer);
                 if (result)
                     return Ok(result);
                 else

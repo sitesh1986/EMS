@@ -1,4 +1,4 @@
-﻿using EMS.Models;
+﻿using EMS.ModelBuilderRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,8 +11,8 @@ namespace EMS.SqlRepository.DbRepository
 {
     public class EmsRepository<T> : IEmsRepository<T> where T : class
     {
-        protected readonly EmsContext _dbContext;
-        public EmsRepository(EmsContext dbContext)
+        protected readonly EmsModelContext _dbContext;
+        public EmsRepository(EmsModelContext dbContext)
         {
             _dbContext = dbContext;
         }

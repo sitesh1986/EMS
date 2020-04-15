@@ -6,11 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0-preview.2.20160.6" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EMS.Models\EMS.ModelsRepository.csproj" />
+    <ProjectReference Include="..\EMS.ModelBuilderRepository\EMS.ModelBuilderRepository.csproj" />
   </ItemGroup>
 
 </Project>

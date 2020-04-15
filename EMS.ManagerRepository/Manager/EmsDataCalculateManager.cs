@@ -1,6 +1,6 @@
 ﻿using EMS.Common.DataCalculation;
 using EMS.ManagerRepository.FactoryRepository;
-using EMS.ModelsRepository.Models;
+using EMS.ModelBuilderRepository.Models;
 using EMS.SqlRepository.DbRepository;
 using Newtonsoft.Json;
 using System;

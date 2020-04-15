@@ -1,6 +1,6 @@
 ﻿using EMS.AzureGraphRepository;
-using EMS.ModelsRepository.Models;
-using EMS.ModelsRepository.Models.GraphModel;
+using EMS.ModelBuilderRepository.Models;
+using EMS.ModelBuilderRepository.Models.GraphModel;
 using EMS.SqlRepository.DbRepository;
 using System;
 using System.Collections.Generic;
@@ -20,10 +20,10 @@ namespace EMS.ManagerRepository.Manager
         }
         public async Task<bool> CreateCustomer(Customer customer)
         {
-            bool b2cUser = await CreateB2CUser(customer);
-            if (b2cUser)
-                await _emsRepository.Add(customer);
-            return b2cUser;
+            //bool b2cUser = await CreateB2CUser(customer);
+            //if (b2cUser)
+               bool user= await _emsRepository.Add(customer);
+            return user;
         }
         private async Task<bool> CreateB2CUser(Customer userModel)
         {
@@ -37,15 +37,15 @@ namespace EMS.ManagerRepository.Manager
                 SignInNames name = new SignInNames
                 {
                     type = "emailAddress",
-                    value = userModel.EmailAddress
+                    value = userModel.Email
                 };
                 names.Add(name);
                 uc.signInNames = names;
                 uc.creationType = "LocalAccount";
-                uc.displayName = userModel.FirstName;
+                uc.displayName = userModel.CustomerName;
                 uc.passwordProfile = new PasswordProfile
                 {
-                    password = userModel.Password,
+                    password = userModel.UserPassword,
                     forceChangePasswordNextLogin = false
                 };
                 uc.passwordPolicies = "DisablePasswordExpiration";

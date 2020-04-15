@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EMS.ModelsRepository.Migrations
+namespace EMS.ModelBuilderRepository.Migrations
 {
-    public partial class Adding_Block_Table : Migration
+    public partial class Add_Table_Block : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

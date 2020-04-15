@@ -1,13 +1,13 @@
-﻿using EMS.ModelsRepository.Models;
+﻿using EMS.ModelBuilderRepository.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace EMS.Models
+namespace EMS.ModelBuilderRepository
 {
-    public class EmsContext : DbContext
+    public class EmsModelContext: DbContext
     {
-        public EmsContext(DbContextOptions<EmsContext> options)
-            : base(options)
+        public EmsModelContext(DbContextOptions<EmsModelContext> options)
+           : base(options)
         {
 
         }

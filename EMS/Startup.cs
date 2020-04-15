@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EMS.AzureGraphRepository;
 using EMS.ManagerRepository.FactoryRepository;
 using EMS.ManagerRepository.Manager;
-using EMS.Models;
-using EMS.ModelsRepository.Models;
+using EMS.ModelBuilderRepository;
+using EMS.ModelBuilderRepository.Models;
 using EMS.SqlRepository.DbRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,13 +34,14 @@ namespace EMS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<EmsContext>(option =>
+            services.AddAutoMapper(typeof(Startup));
+            services.AddDbContext<EmsModelContext>(option =>
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DataConnection"));
             });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "EMS", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
             services.AddScoped<EmsDataCalculateManager>();
             services.AddScoped<EmsBlockManager>();
@@ -57,7 +59,7 @@ namespace EMS
                Configuration["ClientSecret"],
                Configuration["Tenant"]));
         }
-
+      
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

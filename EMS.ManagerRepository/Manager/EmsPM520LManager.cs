@@ -1,6 +1,6 @@
 ﻿using EMS.Common;
 using EMS.Common.ModelMappingClass;
-using EMS.ModelsRepository.Models;
+using EMS.ModelBuilderRepository.Models;
 using EMS.SqlRepository.DbRepository;
 using System;
 using System.Collections.Generic;

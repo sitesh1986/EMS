@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EMS.AzureGraphRepository\EMS.AzureGraphRepository.csproj" />
     <ProjectReference Include="..\EMS.Common\EMS.Common.csproj" />
-    <ProjectReference Include="..\EMS.Models\EMS.ModelsRepository.csproj" />
+    <ProjectReference Include="..\EMS.ModelBuilderRepository\EMS.ModelBuilderRepository.csproj" />
     <ProjectReference Include="..\EMS.SqlRepository\EMS.SqlRepository.csproj" />
   </ItemGroup>
 
