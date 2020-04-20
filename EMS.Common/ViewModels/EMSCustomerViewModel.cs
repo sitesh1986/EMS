@@ -83,5 +83,7 @@ namespace EMS.Common.ViewModels
         public int Unit { get; set; }
         [JsonProperty("licence_expiry")]
         public DateTime LicenceExpiry { get; set; }
+        [JsonProperty("privileges")]
+        public List<int> Privileges { get; set; }
     }
 }

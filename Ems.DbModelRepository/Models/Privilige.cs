@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EMS.ModelBuilderRepository.Models
+namespace EMS.DbModelRepository.Models
 {
-    public class Priviliges:BaseModel
+    public class Privilige:BaseModel
     {
         public string PrivilegeName { get; set; }
-        public  Customer Customer { get; set; }
     }
 }

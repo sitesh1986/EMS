@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EMS.Common\EMS.Common.csproj" />
+    <ProjectReference Include="..\Ems.DbModelRepository\EMS.DbModelRepository.csproj" />
     <ProjectReference Include="..\EMS.ManagerRepository\EMS.ManagerRepository.csproj" />
     <ProjectReference Include="..\EMS.SqlRepository\EMS.SqlRepository.csproj" />
   </ItemGroup>

@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EMS.ModelBuilderRepository\EMS.ModelBuilderRepository.csproj" />
+    <ProjectReference Include="..\Ems.DbModelRepository\EMS.DbModelRepository.csproj" />
   </ItemGroup>
 
 </Project>

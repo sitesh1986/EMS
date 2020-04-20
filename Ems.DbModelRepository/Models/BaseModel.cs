@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EMS.ModelBuilderRepository.Models
+namespace EMS.DbModelRepository.Models
 {
     public abstract class BaseModel
     {

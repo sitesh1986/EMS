@@ -1,4 +1,4 @@
-﻿using EMS.ModelBuilderRepository.Models;
+﻿using EMS.DbModelRepository.Models;
 using EMS.SqlRepository.DbRepository;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace EMS.ManagerRepository.Manager
         {
             _emsRepository = emsRepository;
         }
-        public async Task<bool> CreateBlock(Block block)
+        public async Task<Block> CreateBlock(Block block)
         {
            var result= await _emsRepository.Add(block);
             return result;

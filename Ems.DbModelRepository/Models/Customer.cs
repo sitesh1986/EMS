@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EMS.ModelBuilderRepository.Models
+namespace EMS.DbModelRepository.Models
 {
     public class Customer : BaseModel
     {
@@ -44,6 +44,6 @@ namespace EMS.ModelBuilderRepository.Models
         public DateTime LicenceExpiry { get; set; }
         public bool Monitoring { get; set; }
         public bool Controlling { get; set; }
-        public ICollection<Priviliges> Priviliges { get; set; }
+       
     }
 }

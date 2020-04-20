@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EMS.ModelBuilderRepository.Models.GraphModel
+namespace EMS.DbModelRepository.Models.GraphModel
 {
     public class SignInNames
     {

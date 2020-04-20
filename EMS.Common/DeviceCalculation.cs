@@ -1,4 +1,4 @@
-﻿using EMS.ModelBuilderRepository.Models;
+﻿using EMS.DbModelRepository.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +23,9 @@ namespace EMS.Common
             int secondsAfterEpoch = Int32.Parse(hexValue, System.Globalization.NumberStyles.HexNumber);
             DateTime epoch = new DateTime(1970, 1, 1);
             DateTime myDateTime = epoch.AddSeconds(secondsAfterEpoch);
+            int checkDate = Convert.ToInt32(emsDataReplication.DT);
+            if (checkDate == 0)
+                return (deviceId,DateTime.Now);
             return (deviceId, myDateTime.AddHours(5.30));
             
         }

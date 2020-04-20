@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EMS.Common.ViewModels;
-using EMS.ModelBuilderRepository.Models;
+using EMS.DbModelRepository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ namespace EMS.App_Start
         public MapperConfig()
         {
             CreateMap<EMSCustomerViewModel, Customer>().ReverseMap();
+           
         }
     }
 }

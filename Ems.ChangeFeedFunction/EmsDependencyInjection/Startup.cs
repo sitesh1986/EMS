@@ -7,11 +7,11 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 
 using EMS.Common.ServerConfig;
 using EMS.SqlRepository.DbRepository;
-using EMS.ModelBuilderRepository.Models;
+using EMS.DbModelRepository.Models;
 using EMS.ManagerRepository.Manager;
 using EMS.ManagerRepository.FactoryRepository;
-using EMS.AzureGraphRepository;
-using EMS.ModelBuilderRepository;
+using EMS.DbModelRepository;
+using Ems.DbModelRepository;
 
 [assembly: FunctionsStartup(typeof(Ems.ChangeFeedFunction.EmsDependencyInjection.Startup))]
 namespace Ems.ChangeFeedFunction.EmsDependencyInjection
@@ -21,7 +21,7 @@ namespace Ems.ChangeFeedFunction.EmsDependencyInjection
         public override void Configure(IFunctionsHostBuilder builder)
         {
 
-            builder.Services.AddDbContext<EmsModelContext>(option =>
+            builder.Services.AddDbContext<EmsDbContext>(option =>
                     {
                         option.UseSqlServer(ConfigHelper.GetConnectionnString);
                     });

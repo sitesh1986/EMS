@@ -1,4 +1,5 @@
-﻿using EMS.ModelBuilderRepository;
+﻿using Ems.DbModelRepository;
+
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,16 @@ namespace EMS.SqlRepository.DbRepository
 {
     public class EmsRepository<T> : IEmsRepository<T> where T : class
     {
-        protected readonly EmsModelContext _dbContext;
-        public EmsRepository(EmsModelContext dbContext)
+        protected readonly EmsDbContext _dbContext;
+        public EmsRepository(EmsDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task<bool> Add(T entity)
+        public async Task<T> Add(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
-            return true;
+            return entity;
         }
 
         public async Task<int> CountAll()
@@ -55,7 +56,14 @@ namespace EMS.SqlRepository.DbRepository
 
         public async Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> predicate)
         {
-            return await _dbContext.Set<T>().Where(predicate).ToListAsync() ;
+            return await _dbContext.Set<T>().Where(predicate).ToListAsync();
+        }
+
+        public async Task InsertBulk(List<T> entities)
+        {
+            await _dbContext.Set<T>().AddRangeAsync(entities);
+            await _dbContext.SaveChangesAsync();
+
         }
 
         public async Task Remove(T entity)

@@ -12,7 +12,7 @@ namespace EMS.SqlRepository.DbRepository
         Task<T> GetById(int id);
         Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate);
 
-        Task<bool> Add(T entity);
+        Task<T> Add(T entity);
         Task Update(T entity);
         Task Remove(T entity);
 
@@ -22,5 +22,6 @@ namespace EMS.SqlRepository.DbRepository
         Task<IQueryable<T>> GetByCondition(Expression<Func<T, bool>> predicate);
         Task<int> CountAll();
         Task<int> CountWhere(Expression<Func<T, bool>> predicate);
+        Task InsertBulk(List<T> entities);
     }
 }
