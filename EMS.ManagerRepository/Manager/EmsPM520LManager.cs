@@ -21,7 +21,7 @@ namespace EMS.ManagerRepository.Manager
             _emsMasterRepository = emsMasterRepository;
         }
 
-        public async Task CreateData(Block block, List<string> values, EmsDataReplication emsData)
+        public async Task CreateData(Block block, List<string> values, EmsDataReplication emsData,int slaveId)
         {
            
             Dictionary<string, float> pm250LData = new Dictionary<string, float>();
@@ -40,7 +40,9 @@ namespace EMS.ManagerRepository.Manager
             {
                 DeviceId=deviceDetails.deviceId,
                 DateEms=deviceDetails.emsDate,
-
+                StartingAddress=block.StartAddress,
+                FunctionCode=block.ModBusFC,
+                SlaveId=slaveId,
                 WHCONTOT =pm250LData[pm520LMapping._WHCON],
                 WHGENTOT= pm250LData[pm520LMapping._WHGENTOT],
                 IY= pm250LData[pm520LMapping._IY],

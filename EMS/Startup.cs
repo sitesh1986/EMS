@@ -49,13 +49,14 @@ namespace EMS
             services.AddSingleton<AssertPrivilege>(new  AssertPrivilege
               (Configuration["ClientId"]));
             services.AddScoped<EmsDataCalculateManager>();
-            services.AddScoped<EmsBlockManager>();
+            services.AddScoped<EmsMasterManager>();
             services.AddScoped<EmsDataCalculateManager>();
             services.AddScoped<EmsBlockManager>();
             services.AddScoped<Factory>();
             services.AddScoped<EmsPM520LManager>();
             services.AddScoped<CustomerManager>();
             services.AddScoped<PrivilegeManager>();
+            services.AddScoped<ServiceBusManager>();
             services.AddScoped<EmailManager>();
             services.AddTransient(typeof(IEmsRepository<EmsMaster>), typeof(EmsRepository<EmsMaster>));
             services.AddTransient(typeof(IEmsRepository<Block>), typeof(EmsRepository<Block>));

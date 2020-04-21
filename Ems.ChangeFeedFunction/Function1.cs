@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Ems.ChangeFeedFunction
 {
-    
+
     public class Function1
     {
         private EmsDataCalculateManager _emsDataCalculateManager;
@@ -18,9 +18,9 @@ namespace Ems.ChangeFeedFunction
             _emsDataCalculateManager = emsDataCalculateManager;
         }
         [FunctionName("Function1")]
-        public  async Task Run([ServiceBusTrigger("emsq", Connection = "ServiceBusconnectionString")]string myQueueItem,
+        public async Task Run([ServiceBusTrigger("emsq", Connection = "ServiceBusconnectionString")]string myQueueItem,
             ILogger log)
-         {
+        {
             await _emsDataCalculateManager.Calculation(myQueueItem);
             log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
         }

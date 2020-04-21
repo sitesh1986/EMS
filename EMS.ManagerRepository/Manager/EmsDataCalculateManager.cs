@@ -25,7 +25,7 @@ namespace EMS.ManagerRepository.Manager
         {
             string streamData = string.Empty;
             Block block = new Block();
-            List<string> emsData = new List<string>();
+           
             var rlData = JsonConvert.DeserializeObject<EmsDataReplication>(data);
             if (!string.IsNullOrEmpty(rlData.G))
                 streamData = rlData.G;
@@ -33,14 +33,15 @@ namespace EMS.ManagerRepository.Manager
                 streamData = rlData.Data;
 
             var streamDataList = streamData.Split('/').ToList();
-            streamDataList.RemoveAll(item => item == null);
+            streamDataList.RemoveAll(item => string.IsNullOrEmpty(item));
             foreach (var convertedData in streamDataList)
             {
+                List<string> emsData = new List<string>();
                 var keyValuePairs = EmsCalculation.Calcuclate(convertedData);
                 block = await _emsBlockManager.GetBlocksByFields(keyValuePairs.header["startAddress"], keyValuePairs.header["modeBusFc"], keyValuePairs.header["totalReg"]);
                 emsData.AddRange(keyValuePairs.values);
                 var IpmManager = _factory.GetIPMManager(block.BlockName);
-                await IpmManager.CreateData(block, emsData, rlData);
+                await IpmManager.CreateData(block, emsData, rlData, keyValuePairs.header["slaveId"]);
             }
           
         }

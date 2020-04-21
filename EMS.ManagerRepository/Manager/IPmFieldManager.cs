@@ -8,6 +8,6 @@ namespace EMS.ManagerRepository.Manager
 {
     public interface IpmFieldManager
     {
-        Task CreateData(Block keyValuePairs,List<string> values, EmsDataReplication emsData);
+        Task CreateData(Block keyValuePairs,List<string> values, EmsDataReplication emsData,int slaveId);
     }
 }

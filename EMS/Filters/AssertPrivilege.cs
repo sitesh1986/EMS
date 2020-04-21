@@ -30,10 +30,6 @@ namespace EMS.Filters
             CheckPermissionsAsync(context).Wait();
             base.OnActionExecuting(context);
         }
-
-
-
-
         private Task CheckPermissionsAsync(ActionExecutingContext actionContext)
         {
             CustomerIds = actionContext.HttpContext.Request?.Headers["CustomerId"];
@@ -58,7 +54,7 @@ namespace EMS.Filters
                 .Run(async () => await _privilegeManager.GetCustomerPrivileges(CustomerId)).Result;
             var customerPrivilegeIds = customerPrivileges.Select(x => x.PrivilegeId).ToList();
             var customerPrivilegesName = listOfPrivileges.Where(x => customerPrivilegeIds.Contains(x.Id)).Select(n => n.PrivilegeName).ToList();
-          if(!this._privilege.Any(customerPrivilegesName.Contains))
+            if (!this._privilege.Any(customerPrivilegesName.Contains))
             {
                 actionContext.Result = new ObjectResult(actionContext.ModelState)
                 {
