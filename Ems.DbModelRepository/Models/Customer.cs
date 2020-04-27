@@ -44,6 +44,6 @@ namespace EMS.DbModelRepository.Models
         public DateTime LicenceExpiry { get; set; }
         public bool Monitoring { get; set; }
         public bool Controlling { get; set; }
-       
+       public string DeviceSerialNumber { get; set; }
     }
 }

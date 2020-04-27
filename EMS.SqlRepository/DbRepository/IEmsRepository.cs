@@ -13,7 +13,7 @@ namespace EMS.SqlRepository.DbRepository
         Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate);
 
         Task<T> Add(T entity);
-        Task Update(T entity);
+        Task<T> Update(T entity);
         Task Remove(T entity);
 
         Task<IEnumerable<T>> GetAll();

@@ -58,12 +58,14 @@ namespace EMS
             services.AddScoped<PrivilegeManager>();
             services.AddScoped<ServiceBusManager>();
             services.AddScoped<EmailManager>();
+            services.AddScoped<DeviceManager>();
             services.AddTransient(typeof(IEmsRepository<EmsMaster>), typeof(EmsRepository<EmsMaster>));
             services.AddTransient(typeof(IEmsRepository<Block>), typeof(EmsRepository<Block>));
             services.AddTransient(typeof(IEmsRepository<PM520L>), typeof(EmsRepository<PM520L>));
             services.AddTransient(typeof(IEmsRepository<Customer>), typeof(EmsRepository<Customer>));
             services.AddTransient(typeof(IEmsRepository<CustomerPrivilege>), typeof(EmsRepository<CustomerPrivilege>));
             services.AddTransient(typeof(IEmsRepository<Privilige>), typeof(EmsRepository<Privilige>));
+            services.AddTransient(typeof(IEmsRepository<DeviceModel>), typeof(EmsRepository<DeviceModel>));
             //services.AddSingleton<B2CGraphClient>(new B2CGraphClient
             //   (Configuration["ClientId"],
             //   Configuration["ClientSecret"],

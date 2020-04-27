@@ -71,9 +71,10 @@ namespace EMS.SqlRepository.DbRepository
             await Task.Run(() => _dbContext.Set<T>().Remove(entity));
         }
 
-        public async Task Update(T entity)
+        public async Task<T> Update(T entity)
         {
             await Task.Run(() => _dbContext.Set<T>().Update(entity));
+            return entity;
         }
     }
 }
