@@ -85,5 +85,7 @@ namespace EMS.Common.ViewModels
         public DateTime LicenceExpiry { get; set; }
         [JsonProperty("privileges")]
         public List<int> Privileges { get; set; }
+        [JsonProperty("device_serial_no")]
+        public string DeviceSerialNumber { get; set; }
     }
 }
