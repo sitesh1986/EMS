@@ -18,7 +18,7 @@ namespace EMS.Controllers
             {
                 var httpeRequest = new HttpRequestMessage();
 
-                return httpeRequest.Headers.GetValues("CustomerId").First();
+                return HttpContext.Request.Headers["CustomerId"].ToString();
             }
         }
     }

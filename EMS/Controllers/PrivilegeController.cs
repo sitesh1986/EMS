@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EMS.Common.Constants;
+using EMS.Filters;
 using EMS.ManagerRepository.Manager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +19,7 @@ namespace EMS.Controllers
         {
             _privilegeManager = privilegeManager;
         }
+        [AssertPrivilege(PrivilegesConstant.SuperAdmin)]
         [HttpGet("GetCustomerPrivileges")]
         public async Task<IActionResult> GetCustomerPrivileges()
         {
