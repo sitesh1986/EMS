@@ -25,10 +25,22 @@ namespace EMS.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Post(DeviceViewModel deviceViewModel)
         {
-            var toBeCreateDevice = _mapper.Map<DeviceModel>(deviceViewModel);
-            var device = await _deviceManager.CreateDevice(toBeCreateDevice);
-            var createdDevice = _mapper.Map<DeviceViewModel>(device);
-            return Ok(createdDevice);
+            try
+            {
+                var toBeCreateDevice = _mapper.Map<DeviceModel>(deviceViewModel);
+                var device = await _deviceManager.CreateDevice(toBeCreateDevice);
+                var createdDevice = _mapper.Map<DeviceViewModel>(device);
+                return Ok(createdDevice);
+            }
+            catch(ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
 
         [HttpPut("Update")]

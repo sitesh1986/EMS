@@ -15,6 +15,7 @@ namespace EMS.App_Start
         {
             CreateMap<EMSCustomerViewModel, Customer>().ReverseMap();
             CreateMap<DeviceViewModel, DeviceModel>().ReverseMap();
+            CreateMap<LoginViewModel, Customer>().ReverseMap();
         }
     }
 }

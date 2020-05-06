@@ -45,6 +45,7 @@ namespace EMS
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+           
             services.AddAuthorization();
             services.AddSingleton<AssertPrivilege>(new  AssertPrivilege
               (Configuration["ClientId"]));
@@ -59,6 +60,7 @@ namespace EMS
             services.AddScoped<ServiceBusManager>();
             services.AddScoped<EmailManager>();
             services.AddScoped<DeviceManager>();
+            services.AddScoped<LoginManager>();
             services.AddTransient(typeof(IEmsRepository<EmsMaster>), typeof(EmsRepository<EmsMaster>));
             services.AddTransient(typeof(IEmsRepository<Block>), typeof(EmsRepository<Block>));
             services.AddTransient(typeof(IEmsRepository<PM520L>), typeof(EmsRepository<PM520L>));
@@ -85,7 +87,7 @@ namespace EMS
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "EMS - EMS Management Integration API v1.0");
             });
             app.UseHttpsRedirection();
-
+          
             app.UseRouting();
 
            // app.UseAuthorization();

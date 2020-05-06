@@ -1,4 +1,6 @@
-﻿using EMS.DbModelRepository.Models;
+﻿using EMS.Common;
+using EMS.Common.Constants;
+using EMS.DbModelRepository.Models;
 using EMS.SqlRepository.DbRepository;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,10 @@ namespace EMS.ManagerRepository.Manager
         }
         public async Task<DeviceModel> CreateDevice(DeviceModel deviceModel)
         {
+            deviceModel.DeviceSerialNumber = DeviceHelper.GetDeviceSerialNo(deviceModel.DeviceSerialNumber);
+            var existdevice =await GetDeviceBySerialNo(deviceModel.DeviceSerialNumber);
+            if (existdevice != null)
+                throw new ArgumentException("Serial No already exists");
             var device = await _emsRepository.Add(deviceModel);
             return device;
         }
