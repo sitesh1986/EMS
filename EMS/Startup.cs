@@ -61,6 +61,7 @@ namespace EMS
             services.AddScoped<EmailManager>();
             services.AddScoped<DeviceManager>();
             services.AddScoped<LoginManager>();
+            services.AddScoped<ReportManager>();
             services.AddTransient(typeof(IEmsRepository<EmsMaster>), typeof(EmsRepository<EmsMaster>));
             services.AddTransient(typeof(IEmsRepository<Block>), typeof(EmsRepository<Block>));
             services.AddTransient(typeof(IEmsRepository<PM520L>), typeof(EmsRepository<PM520L>));

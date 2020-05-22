@@ -21,8 +21,14 @@ namespace Ems.ChangeFeedFunction
         public async Task Run([ServiceBusTrigger("emsq", Connection = "ServiceBusconnectionString")]string myQueueItem,
             ILogger log)
         {
-            await _emsDataCalculateManager.Calculation(myQueueItem);
-            log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
+            if (!string.IsNullOrEmpty(myQueueItem))
+            {
+                await _emsDataCalculateManager.Calculation(myQueueItem);
+                log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
+            }
+            else
+                log.LogError("Message is empty");
+           
         }
     }
 }

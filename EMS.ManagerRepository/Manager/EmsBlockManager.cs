@@ -26,5 +26,6 @@ namespace EMS.ManagerRepository.Manager
             var blockdata=await _emsRepository.GetByCondition(x=>x.ModBusFC.Equals(modBusFC) && x.StartAddress.Equals(startAddress) && x.TotalReg.Equals(totalReg));
             return blockdata.FirstOrDefault();
         }
+       
     }
 }
