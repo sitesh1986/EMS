@@ -3,6 +3,7 @@ using EMS.DbModelRepository.Models.GraphModel;
 using EMS.SqlRepository.DbRepository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,9 @@ namespace EMS.ManagerRepository.Manager
         public async Task<Customer> CreateCustomer(Customer customer, List<int> privileges)
         {
             customer.UserPassword = encryptpass(customer.UserPassword);
+            var existCustomer = await _emsRepository.GetWhere(x => x.Email.Equals(customer.Email));
+            if (existCustomer.ToList().Count > 0)
+                throw new Exception("Customer already exists");
             var createdCustomer = await _emsRepository.Add(customer);
             if (privileges != null)
                 await _privilegeManager.CreateCustomerPrivilege(privileges, createdCustomer.Id);

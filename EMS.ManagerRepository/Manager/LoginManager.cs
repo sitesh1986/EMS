@@ -17,10 +17,19 @@ namespace EMS.ManagerRepository.Manager
         }
         public async Task<Customer> CheckUserCredential(Customer customer)
         {
-            var existCustomer = await _emsRepository.GetByCondition(x => (x.UserName.Equals(customer.UserName) || x.Email.Equals(customer.UserName)) && x.UserPassword.Equals(customer.UserPassword));
+            var existCustomer = await _emsRepository.GetByCondition(x => (x.UserName.Equals(customer.UserName) || x.Email.Equals(customer.UserName)) && x.UserPassword.Equals(encryptpass(customer.UserPassword)));
+            
             if (existCustomer.ToList().Count == 0)
                 throw new InvalidOperationException("User Does not Exist");
             return existCustomer.FirstOrDefault();
+        }
+        public string encryptpass(string password)
+        {
+            string msg = "";
+            byte[] encode = new byte[password.Length];
+            encode = Encoding.UTF8.GetBytes(password);
+            msg = Convert.ToBase64String(encode);
+            return msg;
         }
     }
 }

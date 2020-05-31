@@ -17,6 +17,9 @@ namespace EMS.Common.DataCalculation
             Dictionary<string, EnergyStartEndRecord> keyValuePairs = new Dictionary<string, EnergyStartEndRecord>();
             foreach (var data in emsMasters)
             {
+                emsMaster.DeviceId = data.DeviceId;
+                emsMaster.DateEms = data.DateEms;
+                emsMaster.SlaveId = emsMaster.SlaveId;
                 if (data.VLLAVG != 0)
                     ReportConstants._VLLAVG = ReportConstants._VLLAVG + 1;
                 emsMaster.VLLAVG += data.VLLAVG;
@@ -1583,6 +1586,9 @@ namespace EMS.Common.DataCalculation
         {
             EmsMaster master = new EmsMaster
             {
+                 SlaveId=emsMaster.SlaveId,
+                 DeviceId=emsMaster.DeviceId,
+                 DateEms=emsMaster.DateEms,
                 VLLAVG = ReportConstants._VLLAVG != 0 ? emsMaster.VLLAVG / ReportConstants._VLLAVG : emsMaster.VLLAVG,
                 VRY = ReportConstants._VRY != 0 ? emsMaster.VRY / ReportConstants._VRY : emsMaster.VRY,
                 VYB = ReportConstants._VYB != 0 ? emsMaster.VYB / ReportConstants._VYB : emsMaster.VYB,

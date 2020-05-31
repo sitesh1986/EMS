@@ -24,7 +24,10 @@ namespace EMS.Filters
         {
             this._privilege = privilege.Split(",".ToCharArray()).ToList();
         }
-
+        public AssertPrivilege(string[] privilege)
+        {
+            this._privilege = privilege.ToList();
+        }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             CheckPermissionsAsync(context).Wait();

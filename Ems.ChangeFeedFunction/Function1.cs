@@ -18,7 +18,7 @@ namespace Ems.ChangeFeedFunction
             _emsDataCalculateManager = emsDataCalculateManager;
         }
         [FunctionName("Function1")]
-        public async Task Run([ServiceBusTrigger("emsq", Connection = "ServiceBusconnectionString")]string myQueueItem,
+        public async Task Run([ServiceBusTrigger("emsqueue", Connection = "ServiceBusconnectionString")]string myQueueItem,
             ILogger log)
         {
             if (!string.IsNullOrEmpty(myQueueItem))

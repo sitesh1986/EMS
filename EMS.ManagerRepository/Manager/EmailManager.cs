@@ -17,7 +17,7 @@ namespace EMS.ManagerRepository.Manager
             //const string fromPassword = "pdwxutvhjjfqnwdy";
             const string fromPassword = "cukgiaknfjuflbbn";
             const string subject = "User profile creation confirmation in EMS";
-             string body = $"Congratulation of creating your profile in EMS your credential details are Email-{customer.Email} and password-{customer.UserPassword} please login to ems app and change your password";
+            string body = Body(customer);
 
             var smtp = new SmtpClient
             {
@@ -36,6 +36,28 @@ namespace EMS.ManagerRepository.Manager
             {
                 smtp.Send(message);
             }
+        }
+        private string Body(Customer customer)
+        {
+            string htmlString = $@"
+                         Dear Sir/Madam 
+
+                         We warmly Welcome to SMARTFI(Let's save Resourses for our Next Generation) powered by VENLITE INDUSTRY LIMITED, 
+                         1st in the country in this segment to offer Datalogger/RTU with WI - FI Mode of Communication
+                         as an option the easy and intelligent way to Measure, Analyze Conto | &Manage all your assets of Electric,
+                         Water, Automation and Gas consumption cost - effectively
+
+                         You can access your Company Energy Profile by logging on to our website any time using following credentials
+                         (User name and Password are case sensetive)
+
+                         Link:
+                         UserName: { customer.UserName}
+                         Password: { customer.UserPassword}";
+
+
+
+
+            return htmlString;
         }
         private string DecodeFrom64(string encodedData)
         {

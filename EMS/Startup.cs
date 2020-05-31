@@ -90,7 +90,11 @@ namespace EMS
             app.UseHttpsRedirection();
           
             app.UseRouting();
-
+            app.UseCors(corsPolicyBuilder =>
+            corsPolicyBuilder.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            );
            // app.UseAuthorization();
            
             app.UseEndpoints(endpoints =>
