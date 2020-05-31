@@ -87,5 +87,7 @@ namespace EMS.Common.ViewModels
         public List<int> Privileges { get; set; }
         [JsonProperty("device_serial_no")]
         public string DeviceSerialNumber { get; set; }
+        [JsonProperty("meters")]
+        public List<int> Meters { get; set; }
     }
 }

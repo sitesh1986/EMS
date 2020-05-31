@@ -49,5 +49,12 @@ namespace EMS.ManagerRepository.Manager
             var privelegesName = await _privilegeRepository.GetByCondition(x => privilegesIds.Contains(x.Id));
             return privelegesName.Select(x=>x.PrivilegeName).ToList();
         }
+        public async Task<List<Privilige>> GetCustomerPrivilegeByCustomerId(int customerId)
+        {
+            var customerPrivileges = await _emsRepository.GetByCondition(x => x.CustomerId.Equals(customerId));
+            var privilegesIds = customerPrivileges.Select(x => x.PrivilegeId).ToList();
+            var priveleges = await _privilegeRepository.GetByCondition(x => privilegesIds.Contains(x.Id));
+            return priveleges.ToList();
+        }
     }
 }

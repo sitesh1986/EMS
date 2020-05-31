@@ -4,14 +4,16 @@ using Ems.DbModelRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EMS.DbModelRepository.Migrations
 {
     [DbContext(typeof(EmsDbContext))]
-    partial class EmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200531062614_Add_Table_Meter_Master")]
+    partial class Add_Table_Meter_Master
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,24 +187,6 @@ namespace EMS.DbModelRepository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("customers");
-                });
-
-            modelBuilder.Entity("EMS.DbModelRepository.Models.CustomerMeter", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MeterId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("customermeters");
                 });
 
             modelBuilder.Entity("EMS.DbModelRepository.Models.CustomerPrivilege", b =>

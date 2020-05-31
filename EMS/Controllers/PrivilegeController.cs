@@ -27,5 +27,23 @@ namespace EMS.Controllers
             var privileges = await _privilegeManager.GetCustomerPrivilegesNamesById(Convert.ToInt32(customerId));
             return Ok(privileges);
         }
+
+        [AssertPrivilege(PrivilegesConstant.SuperAdmin)]
+        [HttpGet("GetPrivileges")]
+        public async Task<IActionResult> GetPrivileges()
+        {
+            var customerId = base.CustomerId;
+            var privileges = await _privilegeManager.GetAllPrivileges();
+            return Ok(privileges);
+        }
+
+       // [AssertPrivilege(PrivilegesConstant.SuperAdmin)]
+        [HttpGet("GetCustomerPrivileges")]
+        public async Task<IActionResult> GetPrivilegesByCustomerId()
+        {
+            var customerId = base.CustomerId;
+            var privileges = await _privilegeManager.GetCustomerPrivilegeByCustomerId(Convert.ToInt32(customerId));
+            return Ok(privileges);
+        }
     }
 }

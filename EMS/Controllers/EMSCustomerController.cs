@@ -29,7 +29,9 @@ namespace EMS.Controllers
                 var proCustomer = _mapper.Map<Customer>(customerViewModel);
                 if (customerViewModel.Privileges.Count == 0)
                     customerViewModel.Privileges = null;
-                var result = await _customerManager.CreateCustomer(proCustomer,customerViewModel.Privileges);
+                if (customerViewModel.Meters.Count == 0)
+                    customerViewModel.Meters = null;
+                    var result = await _customerManager.CreateCustomer(proCustomer,customerViewModel.Privileges,customerViewModel.Meters);
                 var createdCustomer = _mapper.Map<EMSCustomerViewModel>(result);
                 return Ok(createdCustomer);
             }

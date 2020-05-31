@@ -14,14 +14,16 @@ namespace EMS.ManagerRepository.Manager
         private IEmsRepository<Customer> _emsRepository { get; set; }
         private PrivilegeManager _privilegeManager { get; set; }
         private EmailManager _emailManager { get; set; }
+        private IEmsRepository<CustomerMeter> _meterRepository { get; set; }
         public CustomerManager(IEmsRepository<Customer> emsRepository, PrivilegeManager privilegeManager,
-            EmailManager emailManager)
+            EmailManager emailManager, IEmsRepository<CustomerMeter> meterRepository)
         {
             _emsRepository = emsRepository;
             _privilegeManager = privilegeManager;
             _emailManager = emailManager;
+            _meterRepository = meterRepository;
         }
-        public async Task<Customer> CreateCustomer(Customer customer, List<int> privileges)
+        public async Task<Customer> CreateCustomer(Customer customer, List<int> privileges,List<int> meters)
         {
             customer.UserPassword = encryptpass(customer.UserPassword);
             var existCustomer = await _emsRepository.GetWhere(x => x.Email.Equals(customer.Email));
@@ -30,6 +32,8 @@ namespace EMS.ManagerRepository.Manager
             var createdCustomer = await _emsRepository.Add(customer);
             if (privileges != null)
                 await _privilegeManager.CreateCustomerPrivilege(privileges, createdCustomer.Id);
+            if (meters != null)
+                await CreateCustomerMeter(meters,createdCustomer.Id);
             _emailManager.SendEmailViaWebApi(customer);
             return createdCustomer;
         }
@@ -40,6 +44,20 @@ namespace EMS.ManagerRepository.Manager
             encode = Encoding.UTF8.GetBytes(password);
             msg = Convert.ToBase64String(encode);
             return msg;
+        }
+        public async Task CreateCustomerMeter(List<int> meters,int customerId)
+        {
+            List<CustomerMeter> custMeter= new List<CustomerMeter>();
+            foreach (var meter in meters)
+            {
+                CustomerMeter customerPrivilege = new CustomerMeter
+                {
+                    CustomerId = customerId,
+                    MeterId = meter
+                };
+                custMeter.Add(customerPrivilege);
+            }
+            await _meterRepository.InsertBulk(custMeter);
         }
         //private async Task<bool> CreateB2CUser(Customer userModel)
         //{

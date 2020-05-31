@@ -19,6 +19,7 @@ namespace Ems.DbModelRepository
         private DbSet<Privilige> priviliges { get; set; }
         private DbSet<CustomerPrivilege> customerprivileges { get; set; }
         private DbSet<DeviceModel> deviceModels { get; set; }
-
+        private DbSet<MetersModel> meterMaster { get; set; }
+        private DbSet<CustomerMeter> customermeters{ get; set; }
     }
 }

@@ -62,6 +62,7 @@ namespace EMS
             services.AddScoped<DeviceManager>();
             services.AddScoped<LoginManager>();
             services.AddScoped<ReportManager>();
+            services.AddScoped<MeterManager>();
             services.AddTransient(typeof(IEmsRepository<EmsMaster>), typeof(EmsRepository<EmsMaster>));
             services.AddTransient(typeof(IEmsRepository<Block>), typeof(EmsRepository<Block>));
             services.AddTransient(typeof(IEmsRepository<PM520L>), typeof(EmsRepository<PM520L>));
@@ -69,6 +70,8 @@ namespace EMS
             services.AddTransient(typeof(IEmsRepository<CustomerPrivilege>), typeof(EmsRepository<CustomerPrivilege>));
             services.AddTransient(typeof(IEmsRepository<Privilige>), typeof(EmsRepository<Privilige>));
             services.AddTransient(typeof(IEmsRepository<DeviceModel>), typeof(EmsRepository<DeviceModel>));
+            services.AddTransient(typeof(IEmsRepository<MetersModel>), typeof(EmsRepository<MetersModel>));
+            services.AddTransient(typeof(IEmsRepository<CustomerMeter>), typeof(EmsRepository<CustomerMeter>));
             //services.AddSingleton<B2CGraphClient>(new B2CGraphClient
             //   (Configuration["ClientId"],
             //   Configuration["ClientSecret"],
