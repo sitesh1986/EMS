@@ -9,6 +9,8 @@ namespace EMS.Common.ViewModels
     {
         [JsonProperty("Date")]
         public DateTime DateEms { get; set; }
+        [JsonProperty("MeterId")]
+        public int SlaveId { get; set; }
         [JsonProperty("VLL-Avg")]
         public float VLLAVG { get; set; }
         [JsonProperty("VRY")]
@@ -549,43 +551,43 @@ namespace EMS.Common.ViewModels
         public float ANALOGINPUT1 { get; set; }
         [JsonProperty("Analog Input-2")]
         public float ANALOGINPUT2 { get; set; }
-        [JsonProperty("Analog Input-2")]
+        [JsonProperty("Analog Input- 2")]
         public float ANALOGINPUT21 { get; set; }
         [JsonProperty("Analog Input-3")]
         public float ANALOGINPUT3 { get; set; }
-        [JsonProperty("Analog Input-3")]
+        [JsonProperty("Analog Input- 3")]
         public float ANALOGINPUT31 { get; set; }
         [JsonProperty("Analog Input-4")]
         public float ANALOGINPUT4 { get; set; }
-        [JsonProperty("Analog Input-4")]
+        [JsonProperty("Analog Input- 4")]
         public float ANALOGINPUT41 { get; set; }
         [JsonProperty("Analog Input-5")]
         public float ANALOGINPUT5 { get; set; }
-        [JsonProperty("Analog Input-5")]
+        [JsonProperty("Analog Input- 5")]
         public float ANALOGINPUT51 { get; set; }
         [JsonProperty("Analog Input-6")]
         public float ANALOGINPUT6 { get; set; }
-        [JsonProperty("Analog Input-6")]
+        [JsonProperty("Analog Input- 6")]
         public float ANALOGINPUT61 { get; set; }
         [JsonProperty("Analog Input-7")]
         public float ANALOGINPUT7 { get; set; }
-        [JsonProperty("Analog Input-7")]
+        [JsonProperty("Analog Input- 7")]
         public float ANALOGINPUT71 { get; set; }
         [JsonProperty("Analog Input-8")]
         public float ANALOGINPUT8 { get; set; }
-        [JsonProperty("Analog Input-8")]
+        [JsonProperty("Analog Input- 8")]
         public float ANALOGINPUT81 { get; set; }
         [JsonProperty("Analog Input-9")]
         public float ANALOGINPUT9 { get; set; }
-        [JsonProperty("Analog Input-9")]
+        [JsonProperty("Analog Input- 9")]
         public float ANALOGINPUT91 { get; set; }
         [JsonProperty("Analog Input-10")]
         public float ANALOGINPUT10 { get; set; }
-        [JsonProperty("Analog Input-10")]
+        [JsonProperty("Analog Input- 10")]
         public float ANALOGINPUT101 { get; set; }
         [JsonProperty("Analog Input-11")]
         public float ANALOGINPUT11 { get; set; }
-        [JsonProperty("Analog Input-11")]
+        [JsonProperty("Analog Input- 11")]
         public float ANALOGINPUT111 { get; set; }
         [JsonProperty("Analog Input-12")]
         public float ANALOGINPUT12 { get; set; }
@@ -593,43 +595,43 @@ namespace EMS.Common.ViewModels
         public float DIGITALINPUT1 { get; set; }
         [JsonProperty("Digital Input-2")]
         public float DIGITALINPUT2 { get; set; }
-        [JsonProperty("Digital Input-2")]
+        [JsonProperty("Digital Input- 2")]
         public float DIGITALINPUT21 { get; set; }
         [JsonProperty("Digital Input-3")]
         public float DIGITALINPUT3 { get; set; }
-        [JsonProperty("Digital Input-3")]
+        [JsonProperty("Digital Input- 3")]
         public float DIGITALINPUT31 { get; set; }
         [JsonProperty("Digital Input-4")]
         public float DIGITALINPUT4 { get; set; }
-        [JsonProperty("Digital Input-4")]
+        [JsonProperty("Digital Input- 4")]
         public float DIGITALINPUT41 { get; set; }
         [JsonProperty("Digital Input-5")]
         public float DIGITALINPUT5 { get; set; }
-        [JsonProperty("Digital Input-5")]
+        [JsonProperty("Digital Input- 5")]
         public float DIGITALINPUT51 { get; set; }
         [JsonProperty("Digital Input-6")]
         public float DIGITALINPUT6 { get; set; }
-        [JsonProperty("Digital Input-6")]
+        [JsonProperty("Digital Input- 6")]
         public float DIGITALINPUT61 { get; set; }
         [JsonProperty("Digital Input-7")]
         public float DIGITALINPUT7 { get; set; }
-        [JsonProperty("Digital Input-7")]
+        [JsonProperty("Digital Input- 7")]
         public float DIGITALINPUT71 { get; set; }
         [JsonProperty("Digital Input-8")]
         public float DIGITALINPUT8 { get; set; }
-        [JsonProperty("Digital Input-8")]
+        [JsonProperty("Digital Input- 8")]
         public float DIGITALINPUT81 { get; set; }
         [JsonProperty("Digital Input-9")]
         public float DIGITALINPUT9 { get; set; }
-        [JsonProperty("Digital Input-9")]
+        [JsonProperty("Digital Input- 9")]
         public float DIGITALINPUT91 { get; set; }
         [JsonProperty("Digital Input-10")]
         public float DIGITALINPUT10 { get; set; }
-        [JsonProperty("Digital Input-10")]
+        [JsonProperty("Digital Input- 10")]
         public float DIGITALINPUT101 { get; set; }
         [JsonProperty("Digital Input-11")]
         public float DIGITALINPUT11 { get; set; }
-        [JsonProperty("Digital Input-11")]
+        [JsonProperty("Digital Input- 11")]
         public float DIGITALINPUT111 { get; set; }
         [JsonProperty("Digital Input-12")]
         public float DIGITALINPUT12 { get; set; }
@@ -637,43 +639,43 @@ namespace EMS.Common.ViewModels
         public float DIGITALOUTPUT1 { get; set; }
         [JsonProperty("Digital Output-2")]
         public float DIGITALOUTPUT2 { get; set; }
-        [JsonProperty("Digital Output-2")]
+        [JsonProperty("Digital Output- 2")]
         public float DIGITALOUTPUT21 { get; set; }
         [JsonProperty("Digital Output-3")]
         public float DIGITALOUTPUT3 { get; set; }
-        [JsonProperty("Digital Output-3")]
+        [JsonProperty("Digital Output- 3")]
         public float DIGITALOUTPUT31 { get; set; }
         [JsonProperty("Digital Output-4")]
         public float DIGITALOUTPUT4 { get; set; }
-        [JsonProperty("Digital Output-4")]
+        [JsonProperty("Digital Output- 4")]
         public float DIGITALOUTPUT41 { get; set; }
         [JsonProperty("Digital Output-5")]
         public float DIGITALOUTPUT5 { get; set; }
-        [JsonProperty("Digital Output-5")]
+        [JsonProperty("Digital Output- 5")]
         public float DIGITALOUTPUT51 { get; set; }
         [JsonProperty("Digital Output-6")]
         public float DIGITALOUTPUT6 { get; set; }
-        [JsonProperty("Digital Output-6")]
+        [JsonProperty("Digital Output- 6")]
         public float DIGITALOUTPUT61 { get; set; }
         [JsonProperty("Digital Output-7")]
         public float DIGITALOUTPUT7 { get; set; }
-        [JsonProperty("Digital Output-7")]
+        [JsonProperty("Digital Output- 7")]
         public float DIGITALOUTPUT71 { get; set; }
         [JsonProperty("Digital Output-8")]
         public float DIGITALOUTPUT8 { get; set; }
-        [JsonProperty("Digital Output-8")]
+        [JsonProperty("Digital Output- 8")]
         public float DIGITALOUTPUT81 { get; set; }
         [JsonProperty("Digital Output-9")]
         public float DIGITALOUTPUT9 { get; set; }
-        [JsonProperty("Digital Output-9")]
+        [JsonProperty("Digital Output- 9")]
         public float DIGITALOUTPUT91 { get; set; }
         [JsonProperty("Digital Output-10")]
         public float DIGITALOUTPUT10 { get; set; }
-        [JsonProperty("Digital Output-10")]
+        [JsonProperty("Digital Output- 10")]
         public float DIGITALOUTPUT101 { get; set; }
         [JsonProperty("Digital Output-11")]
         public float DIGITALOUTPUT11 { get; set; }
-        [JsonProperty("Digital Output-11")]
+        [JsonProperty("Digital Output- 11")]
         public float DIGITALOUTPUT111 { get; set; }
         [JsonProperty("Digital Output-12")]
         public float DIGITALOUTPUT12 { get; set; }

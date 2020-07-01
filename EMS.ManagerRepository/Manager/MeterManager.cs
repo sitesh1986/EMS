@@ -29,5 +29,10 @@ namespace EMS.ManagerRepository.Manager
             var meters = await _emsRepository.GetByCondition(x => meterIds.Contains(x.Id));
             return meters.ToList();
         }
+        public async Task<List<int>> GetMeterIdByName(List<string> meterName)
+        {
+            var meters = await _emsRepository.GetByCondition(x => meterName.Contains(x.MeterName));
+            return meters.Select(x=>x.Id).ToList();
+        }
     }
 }

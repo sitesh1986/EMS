@@ -6,10 +6,10 @@ namespace EMS.Common.ViewModels
 {
     public class ReportParameterViewModel
     {
-        public List<int> parameter { get; set; }
-        public List<string> fields { get; set; }
+        public List<string> meter { get; set; }
+        public List<string> parameter { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int interval { get; set; }
+        public string interval { get; set; }
     }
 }

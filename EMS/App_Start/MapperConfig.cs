@@ -13,10 +13,11 @@ namespace EMS.App_Start
     {
         public MapperConfig()
         {
-            CreateMap<EMSCustomerViewModel, Customer>().ReverseMap();
+            CreateMap<Customer, EMSCustomerViewModel>().ReverseMap();
             CreateMap<DeviceViewModel, DeviceModel>().ReverseMap();
             CreateMap<LoginViewModel, Customer>().ReverseMap();
-            CreateMap<EMSMasterViewModel, EmsMaster>().ReverseMap();
+            CreateMap<EmsMaster, EMSMasterViewModel>();
+            //CreateMap<EmsMaster,EMSMasterViewModel>().ReverseMap();
         }
     }
 }

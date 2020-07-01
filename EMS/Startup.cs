@@ -88,18 +88,25 @@ namespace EMS
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
+
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "EMS - EMS Management Integration API v1.0");
             });
             app.UseHttpsRedirection();
           
             app.UseRouting();
+            //app.UseCors(corsPolicyBuilder =>
+            //corsPolicyBuilder.WithOrigins("http://localhost:3000", "https://raviprakashsingh.github.io")
+            //.AllowAnyMethod()
+            //.AllowAnyHeader()
+            //);
             app.UseCors(corsPolicyBuilder =>
-            corsPolicyBuilder.WithOrigins("http://localhost:3000")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            );
-           // app.UseAuthorization();
-           
+           corsPolicyBuilder.WithOrigins("http://localhost:3000")
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           );
+
+            // app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

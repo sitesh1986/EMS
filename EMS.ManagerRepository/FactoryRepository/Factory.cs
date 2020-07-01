@@ -17,12 +17,7 @@ namespace EMS.ManagerRepository.FactoryRepository
         public IpmFieldManager returnvalues = null;
         public IpmFieldManager GetIPMManager(string type)
         {
-            switch (type)
-            {
-                case ConstHelper._PM520L:
-                    returnvalues = _emsPM520LManager;
-                    break;
-            }
+            returnvalues = _emsPM520LManager;
             return returnvalues;
         }
     }

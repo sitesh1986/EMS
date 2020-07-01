@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using EMS.Common.Constants;
 using EMS.Common.ViewModels;
+using EMS.DbModelRepository.Models;
 using EMS.Filters;
 using EMS.ManagerRepository.Manager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace EMS.Controllers
 {
@@ -23,20 +25,26 @@ namespace EMS.Controllers
             _reportManager = reportManager;
             _mapper = mapper;
         }
-        [HttpPost("HistoricalData")]
+        [HttpPost("HistoricalReport")]
         public async Task<IActionResult> GetHistoricalData(ReportParameterViewModel data)
         {
-            var historical = await _reportManager.GetHistoricalData(data.parameter,data.fields,data.StartDate,data.EndDate);
-            var mappedData= _mapper.Map<List<EMSMasterViewModel>>(historical);
-            return Ok(mappedData);
+
+            var historical = await _reportManager.GetReportByMiuteData(data.meter,data.parameter,data.StartDate,data.EndDate, data.interval);
+            var mappedData= _mapper.Map<List<EmsMaster>, List<EMSMasterViewModel>>(historical);
+            var serializeObject = JsonConvert.SerializeObject(mappedData);
+            return Ok(serializeObject);
         }
-        [AssertPrivilege(PrivilegesConstant.SuperAdmin)]
-        [HttpPost("ReportByInterval")]
-        public async Task<IActionResult> GetReportByInterval(ReportParameterViewModel data)
-        {
-            var historical = await _reportManager.GetReportByMiuteData(data.parameter, data.fields, data.StartDate, data.EndDate,data.interval);
-            var mappedData = _mapper.Map<List<EMSMasterViewModel>>(historical);
-            return Ok(mappedData);
-        }
+        //[AssertPrivilege(PrivilegesConstant.SuperAdmin)]
+        //[HttpPost("ReportByInterval")]
+        //public async Task<IActionResult> GetReportByInterval(ReportParameterViewModel data)
+        //{
+        //    EMSMasterViewModel eMSMasterView = new EMSMasterViewModel();
+        //    var historical = await _reportManager.GetReportByMiuteData(data.meter, data.parameter, data.StartDate, data.EndDate,data.interval);
+        //    var mappedData = _mapper.Map<List<EmsMaster>,List<EMSMasterViewModel>>(historical);
+
+        //    var serializeObject = JsonConvert.SerializeObject(mappedData);
+            
+        //    return Ok(serializeObject);
+        //}
     }
 }

@@ -19,7 +19,7 @@ namespace EMS.Common.DataCalculation
             {
                 emsMaster.DeviceId = data.DeviceId;
                 emsMaster.DateEms = data.DateEms;
-                emsMaster.SlaveId = emsMaster.SlaveId;
+                emsMaster.SlaveId = data.SlaveId;
                 if (data.VLLAVG != 0)
                     ReportConstants._VLLAVG = ReportConstants._VLLAVG + 1;
                 emsMaster.VLLAVG += data.VLLAVG;

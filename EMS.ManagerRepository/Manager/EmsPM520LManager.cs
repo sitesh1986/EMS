@@ -1,4 +1,5 @@
 ﻿using EMS.Common;
+using EMS.Common.Constants;
 using EMS.Common.ModelMappingClass;
 using EMS.DbModelRepository.Models;
 using EMS.SqlRepository.DbRepository;
@@ -15,6 +16,7 @@ namespace EMS.ManagerRepository.Manager
     {
         private IEmsRepository<EmsMaster> _emsMasterRepository { get; set; }
         private IEmsRepository<PM520L> _emsRepository { get; set; }
+        Dictionary<string, float> pm250LData = new Dictionary<string, float>();
         public EmsPM520LManager(IEmsRepository<PM520L> emsRepository,IEmsRepository<EmsMaster> emsMasterRepository)
         {
             _emsRepository = emsRepository;
@@ -25,8 +27,8 @@ namespace EMS.ManagerRepository.Manager
         {
             try
             {
-                Dictionary<string, float> pm250LData = new Dictionary<string, float>();
-                var pm520L = await _emsRepository.GetAll();
+                
+                var pm520L = await _emsRepository.GetWhere(x=>x.ModelName.Contains(block.BlockName));
                 for (int i = 0; i < values.Count; i++)
                 {
                     Int32 IntRep = Int32.Parse(values[i], NumberStyles.AllowHexSpecifier);
@@ -44,20 +46,9 @@ namespace EMS.ManagerRepository.Manager
                     StartingAddress = block.StartAddress,
                     FunctionCode = block.ModBusFC,
                     SlaveId = slaveId,
-                    WHCONTOT = pm250LData[pm520LMapping._WHCON],
-                    WHGENTOT = pm250LData[pm520LMapping._WHGENTOT],
-                    IY = pm250LData[pm520LMapping._IY],
-                    IB = pm250LData[pm520LMapping._IB],
-                    IR = pm250LData[pm520LMapping._IR],
-                    VR = pm250LData[pm520LMapping._VR],
-                    VY = pm250LData[pm520LMapping._VY],
-                    VB = pm250LData[pm520LMapping._VB],
-                    WR = pm250LData[pm520LMapping._WR],
-                    WY = pm250LData[pm520LMapping._WY],
-                    WB = pm250LData[pm520LMapping._WB],
-                    WattsTot = pm250LData[pm520LMapping._WATTSTOT],
-                    PFAVG = pm250LData[pm520LMapping._PFAVG]
+                  
                 };
+                MapRecordField(emsMaster, block.BlockName);
                 emsMaster.VLNAVG = (emsMaster.VRY + emsMaster.VYB + emsMaster.VBR) / 3;
                 emsMaster.VLNAVG = (emsMaster.VR + emsMaster.VY + emsMaster.VB) / 3;
                 emsMaster.IAVG = (emsMaster.IR + emsMaster.IY + emsMaster.IB) / 3;
@@ -67,7 +58,41 @@ namespace EMS.ManagerRepository.Manager
             {
 
             }
+           
             }
+        public void MapRecordField(EmsMaster emsMaster, string meterName)
+        {
+            switch(meterName)
+            {
+                case MeterConstant._Venlite1:
+                    emsMaster.WHCONTOT = pm250LData[pm520LMapping._WHCON];
+                    emsMaster.WHGENTOT = pm250LData[pm520LMapping._WHGENTOT];
+                    emsMaster.IY = pm250LData[pm520LMapping._IY];
+                    emsMaster.IB = pm250LData[pm520LMapping._IB];
+                    emsMaster.IR = pm250LData[pm520LMapping._IR];
+                    emsMaster.VR = pm250LData[pm520LMapping._VR];
+                    emsMaster.VY = pm250LData[pm520LMapping._VY];
+                    emsMaster.VB = pm250LData[pm520LMapping._VB];
+                    emsMaster.WR = pm250LData[pm520LMapping._WR];
+                    emsMaster.WY = pm250LData[pm520LMapping._WY];
+                    emsMaster.WB = pm250LData[pm520LMapping._WB];
+                    emsMaster.WattsTot = pm250LData[pm520LMapping._WATTSTOT];
+                    emsMaster.PFAVG = pm250LData[pm520LMapping._PFAVG];
+                    break;
+                case MeterConstant._Venlite2:
+                    emsMaster.WHGENTOT = pm250LData[Vanlite2Mapping._WHGENTOT];
+                    emsMaster.IY = pm250LData[Vanlite2Mapping._IY];
+                    emsMaster.IB = pm250LData[Vanlite2Mapping._IB];
+                    emsMaster.IR = pm250LData[Vanlite2Mapping._IR];
+                    emsMaster.VR = pm250LData[Vanlite2Mapping._VR];
+                    emsMaster.VY = pm250LData[Vanlite2Mapping._VY];
+                    emsMaster.VB = pm250LData[Vanlite2Mapping._VB];
+                    emsMaster.WR = pm250LData[Vanlite2Mapping._WR];
+                    emsMaster.WY = pm250LData[Vanlite2Mapping._WY];
+                    emsMaster.WB = pm250LData[Vanlite2Mapping._WB];
+                    break;
+            }
+        }
     }
 
 }

@@ -20,7 +20,7 @@ namespace EMS.Controllers
             _privilegeManager = privilegeManager;
         }
         [AssertPrivilege(PrivilegesConstant.SuperAdmin)]
-        [HttpGet("GetCustomerPrivileges")]
+        [HttpGet("GetCustPrivileges")]
         public async Task<IActionResult> GetCustomerPrivileges()
         {
             var customerId = base.CustomerId;

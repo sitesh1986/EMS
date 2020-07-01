@@ -12,98 +12,123 @@ namespace EMS.ManagerRepository.Manager
     public class ReportManager
     {
         private IEmsRepository<EmsMaster> _emsRepository { get; set; }
-        public ReportManager(IEmsRepository<EmsMaster> emsRepository)
+        private MeterManager _meterManager { get; set; }
+        public ReportManager(IEmsRepository<EmsMaster> emsRepository, MeterManager meterManager)
         {
             _emsRepository = emsRepository;
+            _meterManager = meterManager;
         }
-        public async Task<List<EmsMaster>> GetHistoricalData(List<int> parameter, List<string> fields, DateTime startDate, DateTime EndDate)
-        {
-            List<EmsMaster> emsMasters = new List<EmsMaster>();
-            var stDate = startDate.Date.AddHours(00).AddMinutes(00).AddSeconds(00);
-            var enDate = EndDate.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
-            var masterData = await _emsRepository.GetWhere(x => parameter.Contains(x.SlaveId) && x.DateEms >= stDate && x.DateEms <= enDate);
-            emsMasters.Add(ReportCalculation.GetHistoricalDataCalculation(masterData.ToList()));
-            return emsMasters;
-        }
-        public async Task<List<EmsMaster>> GetReportByMiuteData(List<int> parameter, List<string> fields, DateTime startDate, DateTime endDate, int minutes)
-        {
-            List<EmsMaster> ems = new List<EmsMaster>();
-             startDate = startDate.Date.AddHours(00).AddMinutes(00).AddSeconds(00);
-             endDate = endDate.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
-            var masterData = await _emsRepository.GetWhere(x => parameter.Contains(x.SlaveId) && x.DateEms >= startDate && x.DateEms <= endDate);
+        //public async Task<List<EmsMaster>> GetHistoricalData(List<string> parameter, List<string> fields, DateTime startDate, DateTime EndDate)
+        //{
+        //    List<EmsMaster> emsMasters = new List<EmsMaster>();
+        //    var stDate = startDate.Date.AddHours(00).AddMinutes(00).AddSeconds(00);
+        //    var enDate = EndDate.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+        //    var meterId = await _meterManager.GetMeterIdByName(parameter);
+        //    var masterData = await _emsRepository.GetWhere(x => meterId.Contains(x.SlaveId) && x.DateEms >= stDate && x.DateEms <= enDate);
+        //    emsMasters.Add(ReportCalculation.GetHistoricalDataCalculation(masterData.ToList()));
+        //    return emsMasters;
+        //}
 
-            switch (minutes)
+        public void CheckEmptyData(long startTSInTicks, long endTsInTicks, long ticksPerintervalMin, List<EmsMaster> ems,int minutes=0)
+        {
+            for (long i = startTSInTicks; i <= endTsInTicks; i += ticksPerintervalMin)
             {
-                case 1:
-                    var emsDat = masterData.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / 1)).Select(group => group.ToList()).ToList();
-                    foreach (var em in emsDat)
+                var dat = new DateTime(i);
+                var endDat = dat.AddMinutes(minutes);
+                var existingData = ems.Any(x => x.DateEms.Ticks >= dat.Ticks && x.DateEms.Ticks <= endDat.Ticks);
+                if (!existingData)
+                {
+                    if (i > startTSInTicks)
                     {
-                        ems.AddRange(em);
+                        ems.Add(new EmsMaster
+                        {
+                            DateEms = dat
+                        });
                     }
-
-                    break;
-                case 15:
-                    emsDat = masterData.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / 15)).Select(group => group.ToList()).ToList();
-                    foreach (var em in emsDat)
-                    {
-
-                       ems.Add(ReportCalculation.GetHistoricalDataCalculation(em.ToList()));
-                    }
-                    break;
-                case 30:
-                    emsDat = masterData.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / 30)).Select(group => group.ToList()).ToList();
-                    foreach (var em in emsDat)
-                    {
-
-                        ems.Add(ReportCalculation.GetHistoricalDataCalculation(em.ToList()));
-                    }
-                    break;
-                case 45:
-                    emsDat = masterData.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / 45)).Select(group => group.ToList()).ToList();
-                    foreach (var em in emsDat)
-                    {
-
-                        ems.Add(ReportCalculation.GetHistoricalDataCalculation(em.ToList()));
-                    }
-                    break;
-                case 60:
-                    emsDat = masterData.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / 60)).Select(group => group.ToList()).ToList();
-                    foreach (var em in emsDat)
-                    {
-
-                        ems.Add(ReportCalculation.GetHistoricalDataCalculation(em.ToList()));
-                    }
-                    break;
-                case 1440:
-                    emsDat = masterData.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / 1440)).Select(group => group.ToList()).ToList();
-                    foreach (var em in emsDat)
-                    {
-
-                        ems.Add(ReportCalculation.GetHistoricalDataCalculation(em.ToList()));
-                    }
-                    break;
-                case 43200:
-                    emsDat = masterData.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / 43200)).Select(group => group.ToList()).ToList();
-                    foreach (var em in emsDat)
-                    {
-
-                        ems.Add(ReportCalculation.GetHistoricalDataCalculation(em.ToList()));
-                    }
-                    break;
-                case 518400:
-                    emsDat = masterData.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / 51800)).Select(group => group.ToList()).ToList();
-                    foreach (var em in emsDat)
-                    {
-
-                        ems.Add(ReportCalculation.GetHistoricalDataCalculation(em.ToList()));
-                    }
-                    break;
-                default:
-                    break;
-
+                }
             }
+        }
+        public async Task<List<EmsMaster>> GetReportByMiuteData(List<string> parameter, List<string> fields, DateTime startDate, DateTime endDate, string interval)
+        {
+            int minutes = 0;
+           
+            TimeSpan rs = endDate - startDate;
+            List<EmsMaster> ems = new List<EmsMaster>();
+            switch (interval.ToUpper())
+            {
+                case "1":
+                    minutes = 1;
+                    break;
+                case "15":
+                    minutes = 15;
+                    break;
+                case "30":
+                    minutes = 30;
+                    break;
+                case "45":
+                    minutes = 45;
+                    break;
 
-            return ems;
+                case "60":
+                    minutes = 60;
+                    break;
+                case "24":
+                    minutes = Convert.ToInt32(rs.TotalMinutes);
+                    break;
+                case "MONTH":
+                    minutes = Convert.ToInt32(rs.TotalMinutes);
+                    break;
+                case "YEAR":
+                    minutes = Convert.ToInt32(rs.TotalMinutes);
+                    break;
+            }
+            var meterId = await _meterManager.GetMeterIdByName(parameter);
+            long ticksPerSecond = 10000000;
+            long ticksPerMinute = ticksPerSecond * 60;
+            long ticksPerintervalMin = ticksPerMinute * minutes;
+            long startTSInTicks = startDate.Ticks;
+            long endTsInTicks = endDate.Ticks;
+            foreach (var metId in meterId)
+            {
+                var slaveId = await _emsRepository.GetWhere(x => x.SlaveId.Equals(metId) && x.DateEms >= startDate && x.DateEms <= endDate);
+                if (slaveId.Count() > 0)
+                {
+                    var emsDat = slaveId.GroupBy(y => (int)(y.DateEms.Ticks / TimeSpan.TicksPerMinute / minutes)).Select(group => group.ToList()).ToList();
+                   if(minutes==1)
+                    {
+                        foreach (var em in emsDat)
+                        {
+                            ems.AddRange(em);
+                        }
+                    }
+                   else
+                    {
+                        foreach (var em in emsDat)
+                        {
+                            ems.Add(ReportCalculation.GetHistoricalDataCalculation(em.ToList()));
+                        }
+                    }
+                   
+                   
+                    CheckEmptyData(startTSInTicks, endTsInTicks, ticksPerintervalMin, ems,minutes);
+                }
+                else
+                {
+                    for (long i = startTSInTicks; i <= endTsInTicks; i += ticksPerintervalMin)
+                    {
+                        if (i > startTSInTicks)
+                        {
+                            ems.Add(new EmsMaster
+                            {
+                                DateEms = new DateTime(i),
+                                SlaveId = metId
+                            });
+                        }
+                    }
+                }
+            }
+            return ems.OrderByDescending(x => x.DateEms).ToList();
         }
     }
+
 }
